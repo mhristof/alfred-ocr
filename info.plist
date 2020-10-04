@@ -59,7 +59,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>ts=$(date --iso=seconds | sed 's/+.*$//g')
+				<string>ts=$(date +%Y-%m-%dT%H:%M:%S)
 
 screencapture -i $ts
 
@@ -97,6 +97,11 @@ make $ts.txt</string>
 			<key>ypos</key>
 			<integer>145</integer>
 		</dict>
+	</dict>
+	<key>variables</key>
+	<dict>
+		<key>PATH</key>
+		<string>/usr/bin:/usr/sbin:/usr/local/bin:/bin</string>
 	</dict>
 	<key>variablesdontexport</key>
 	<array/>
