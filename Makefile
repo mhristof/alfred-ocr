@@ -32,6 +32,18 @@ clean:
 	rm -rf .build
 .PHONY: clean
 
+minor:  ## Create a minor git tag and push it
+	sed -i "" 's/$(shell semver current | tr -d 'v' )/$(shell semver -n | rev | cut -d ' ' -f1 | rev | tr -d 'v')/' info.plist
+	make commitVersion
+	semver
+	git push --tags
+
+patch:  ## Create a patch git tag and push it
+	sed -i "" 's/$(shell semver current | tr -d 'v' )/$(shell semver -p -n | rev | cut -d ' ' -f1 | rev | tr -d 'v')/' info.plist
+	make commitVersion
+	semver --patch
+	git push --tags
+
 .PHONY:
 help:           ## Show this help.
 	@grep '.*:.*##' Makefile | grep -v grep  | sort | sed 's/:.* ##/:/g' | column -t -s:
