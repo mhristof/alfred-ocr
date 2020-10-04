@@ -11,7 +11,7 @@ build: .build
 
 
 %.txt: .build
-	docker run -v $$PWD:/work -w /work --rm $(IMAGE) tesseract '$(basename $@)' '$(basename $@)'
+	docker run -v "$(PWD):/work" -w /work --rm $(IMAGE) tesseract '$(basename $@)' '$(basename $@)'
 
 zip: info.plist  Dockerfile Makefile
 	zip -r $(IMAGE).alfredworkflow $^
