@@ -1,7 +1,7 @@
 MAKEFLAGS += --warn-undefined-variables
 SHELL := bash
 .SHELLFLAGS := -eu -o pipefail -c
-.DEFAULT_GOAL := help
+.DEFAULT_GOAL := zip
 .ONESHELL:
 
 
@@ -11,7 +11,10 @@ build: .build
 
 
 %.txt: .build
-	docker run -v $$PWD:/work -w /work --rm $(IMAGE) tesseract $(basename $@) $(basename $@)
+	docker run -v $$PWD:/work -w /work --rm $(IMAGE) tesseract '$(basename $@)' '$(basename $@)'
+
+zip: info.plist  Dockerfile Makefile
+	zip -r $(IMAGE).alfredworkflow $^
 
 .build: 
 	docker build -t $(IMAGE) .
